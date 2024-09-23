@@ -69,7 +69,7 @@ export class ApiServiceService {
 
 
   login(data: any): Observable<any>{
-    return this.http.post('https://navkiraninfotech.com/test_api/index.php', data);
+    return this.http.post(environment.api_dev + 'socialUsers/login-user', data);
   }
   registration(data: any): Observable<any>{
     return this.http.post(environment.api_dev + 'socialUsers/add-user', data);

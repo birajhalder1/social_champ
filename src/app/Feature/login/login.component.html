@@ -7,17 +7,18 @@
       
       <form [formGroup]="form">
         <mat-form-field appearance="outline">
-          <mat-label>Email</mat-label>
+          <mat-label>Mobile</mat-label>
           <input
+            maxlength="10"
             matInput
-            formControlName="email"
-            placeholder="Enter your email"
+            formControlName="mobile"
+            placeholder="Enter your mobile"
           />
-          <mat-error *ngIf="form.get('email')?.hasError('required')">
-            Email is required
+          <mat-error *ngIf="form.get('mobile')?.hasError('required')">
+            Mobile is required
           </mat-error>
-          <mat-error *ngIf="form.get('email')?.hasError('pattern')">
-            Invalid email address
+          <mat-error *ngIf="form.get('mobile')?.hasError('minLength')">
+            Mobile must be 10 digit characters long
           </mat-error>
         </mat-form-field>
 

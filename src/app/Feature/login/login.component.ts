@@ -17,7 +17,8 @@ export class LoginComponent implements OnInit {
   constructor(private fb: FormBuilder, private _snackBar: MatSnackBar, private service: ApiServiceService, private router: Router) {
     this.form = this.fb.group({
       isRemember: [false],
-      email: ['', [Validators.required, Validators.pattern(EMAIL_PATTERN)]],
+      // email: ['', [Validators.required, Validators.pattern(EMAIL_PATTERN)]],
+      mobile: ['', [Validators.required, Validators.minLength(10)]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
@@ -25,11 +26,11 @@ export class LoginComponent implements OnInit {
     if(localStorage.getItem('isRemember')){
       let data = JSON.parse(localStorage.getItem('isRemember') || '');
       this.form.get('isRemember')?.setValue(data.isRemember);
-      this.form.get('email')?.setValue(data.email);
+      this.form.get('mobile')?.setValue(data.mobile);
       this.form.get('password')?.setValue(data.password);
     }else{
       this.form.get('isRemember')?.setValue(false);
-      this.form.get('email')?.setValue('');
+      this.form.get('mobile')?.setValue('');
       this.form.get('password')?.setValue('');
     }
   }
@@ -40,20 +41,18 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     if (this.form.valid) {
-      const formData = new FormData();
-      // formData.append("type", 'login');
-      formData.append("email", this.form.value.email);
-      formData.append("password", this.form.value.password);
+      const formData: any = {};
+      formData["mobile"] = this.form.value.mobile
+      formData["password"] = this.form.value.password
+
+
 
       this.isApiCalling = true;
       this.service.login(formData).subscribe((res: any) => {
-        this._snackBar.open(res.message, '', {
-          duration: 2000,
-          horizontalPosition: 'right',
-          verticalPosition: 'top'
-        });
+        this.service.successAlert(res.message ? res.message : "Something went wrong, please try again latter.");
         this.isApiCalling = false;
-        if(res.success){
+        if(res.status == 200){
+          localStorage.setItem('currentUser', JSON.stringify(this.form.value));
           if(this.form.value.isRemember){
             localStorage.setItem('isRemember', JSON.stringify(this.form.value));
           }else{
