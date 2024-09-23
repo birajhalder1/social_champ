@@ -1,0 +1,27 @@
+<div class="app-header">
+    <div class="topnav">
+        <span [routerLink]="['/dashboard']" class="title">Social Champ</span>
+        <div class="desktop">
+            <!-- <a [ngClass]="{active: active_url == '/movie-list'}" [routerLink]="['/movie-list']" >Movie List</a>
+            <a [ngClass]="{active: active_url == '/contact-us'}" [routerLink]="['/contact-us']" >Contact Us</a> -->
+            <a (click)="logout()">Log Out</a>
+        </div>
+        <div class="mobile-menu">
+            <mat-icon (click)="onMobileNavBarClick()">menu</mat-icon>
+            <div class="main-menu-bar">
+                <div class="mobile-title-area">
+                    <span [routerLink]="['/dashboard']" class="title">Social Champ</span>
+                    <button mat-icon-button class="close-sidebar" (click)="closeSidebar()">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </div>
+                <ul class="mobile-menu-item">
+                    <!-- <li [ngClass]="{active: active_url == '/dashboard'}" [routerLink]="['/dashboard']">Dashboard</li>
+                    <li [ngClass]="{active: active_url == '/movie-list'}" [routerLink]="['/movie-list']">Movie List</li>
+                    <li [ngClass]="{active: active_url == '/contact-us'}" [routerLink]="['/contact-us']">Contact Us</li> -->
+                    <li (click)="logout()">Log Out</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,85 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.content {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 35%;
+}
+.card {
+  font-weight: 600;
+  border: none;
+  width: auto;
+  background: radial-gradient(#1227ae, transparent);
+}
+
+.login-button {
+  margin-top: 10px;
+  text-align: center;
+}
+.mat-input-wrapper {
+  width: 400px !important;
+}
+.mat-form-field {
+  width: 100%;
+}
+.container {
+  padding: 20px 20px;
+}
+.close-icon {
+  margin-top: -20px;
+  background: radial-gradient(rgba(2, 0, 36, 1), transparent);
+  color: #fff;
+  margin-top: -35px !important;
+  margin-left: 205px !important;
+  position: absolute !important;
+  width: 30px !important;
+  height: 30px !important;
+}
+
+.close-icon .mat-icon {
+  line-height: 12px !important;
+  font-size: 17px !important;
+}
+.weather-title {
+  font-size: 20px;
+}
+.link {
+  text-decoration: underline;
+  cursor: pointer;
+}
+body {
+  background: rgba(0, 0, 0, 0.2);
+}
+.sidebar-scroll{
+  overflow: hidden;
+}
+@media (max-width: 999px) {
+  .content {
+    width: 90%;
+  }
+  .main_area {
+    display: block !important;
+  }
+  .image_area img {
+    width: 100% !important;
+    height: 100% !important;
+  }
+  .title {
+    font-size: 20px !important;
+  }
+  .desktop{
+    display: none;
+  }
+}

@@ -1,0 +1,17 @@
+<button mat-icon-button mat-dialog-close class="close-icon">
+  <mat-icon>close</mat-icon>
+</button>
+<span class="weather-title">Current Weather Info</span>
+<hr>
+<mat-dialog-content>
+  <div>
+    <p>Location: {{weatherData.location?.name}}</p>
+    <p>Humidity: {{weatherData.current?.humidity}}%</p>
+    <p>Air Quality: {{weatherData.current?.wind_kph}} km/h</p>
+    <p>Last Updated: {{weatherData.current?.last_updated}}</p>
+  </div>
+</mat-dialog-content>
+<!-- <mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+  <button mat-button (click)="onConfirm()">Confirm</button>
+</mat-dialog-actions> -->

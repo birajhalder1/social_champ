@@ -1,0 +1,14 @@
+.main_div{
+    height: 80vh;
+}
+
+body{
+    background: rgba(0, 0, 0, 0.2);
+  }
+  
+  .mat-focus-indicator {
+    position: static !important;
+  }
+  .mat-raised-button {
+    transform: none !important;
+  }

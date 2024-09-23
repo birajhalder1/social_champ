@@ -1,0 +1,66 @@
+<app-header></app-header>
+<div class="container">
+  <h1>Contact Us</h1>
+  <hr />
+  <div class="main_area">
+    <div class="image_area">
+      <img src="assets/image/contact-us-image.jpg" alt="Contact" />
+    </div>
+    <div>
+      <h2 class="title">
+        Hello we are Tech Exactly. We translate your ideas into futuristic
+        digital solutions and immersive mobile experiences.
+      </h2>
+      <p>
+        Unit 301, 3rd Floor, Stesalit Towers, EP & GP Block, E2-3, Sector V,
+        Salt Lake, Kolkata 700091
+      </p>
+      <p>
+        WeWork, Salarpuria Symbiosis, Bannerghatta Rd, Arekere Village, Begur
+        Hobli, Bengaluru, Karnataka 560076
+      </p>
+      <p>For sales enquiries : +1 315 316 1276 | info@techexactly.com</p>
+      <p>For HR enquiries : +91 85829 43243 | hr@techexactly.com</p>
+
+      <form [formGroup]="form">
+        <mat-form-field appearance="outline">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="name" placeholder="Enter your name" />
+          <mat-error *ngIf="form.get('name')?.hasError('required')">
+            Name is required
+          </mat-error>
+          <mat-error *ngIf="form.get('name')?.hasError('pattern')">
+            Invalid name address
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" placeholder="Enter your email" />
+          <mat-error *ngIf="form.get('email')?.hasError('required')">
+            Email is required
+          </mat-error>
+          <mat-error *ngIf="form.get('email')?.hasError('pattern')">
+            Invalid email address
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Phone Number</mat-label>
+          <input matInput formControlName="phone" placeholder="Enter your phone number" maxlength="10" minlength="10" />
+          <mat-error *ngIf="form.get('phone')?.hasError('required')">
+            Phone number is required
+          </mat-error>
+          <mat-error *ngIf="form.get('phone')?.hasError('pattern')">
+            Invalid phone number
+          </mat-error>
+        </mat-form-field>
+
+        <div class="login-button">
+          <button mat-raised-button color="primary" type="submit" (click)="onSubmit()">
+            {{ isApiCalling ? "Please Wait.." : "Submit" }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>
