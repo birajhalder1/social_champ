@@ -36,6 +36,23 @@ export class ApiServiceService {
     });
   }
 
+
+  getHeader() {
+    return {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('data') || 'false').body.token
+      })
+    }
+  };
+  getHeaderFileUpload() {
+    return {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('data')|| 'false').body.token
+      })
+    }
+  };
+
   signIn() {
     const auth2 = gapi.auth2.getAuthInstance();
     return auth2.signIn().then((googleUser: any) => {
@@ -45,6 +62,10 @@ export class ApiServiceService {
   }
   api_google_auth(data: any): Observable<any>{
     return this.http.post(environment.api_dev + 'socialUsers/google-login', data);
+  }
+
+  allPost(): Observable<any>{
+    return this.http.get(environment.api_dev + 'post_management/getAllPost', this.getHeader());
   }
 
   successAlert(message: string){
