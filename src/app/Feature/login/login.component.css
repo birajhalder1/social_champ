@@ -1,0 +1,23 @@
+.social_login_wapper{
+    display: flex;
+    margin-top: 20px;
+}
+.or_left, .or_right{
+    background: #e5e7eb;
+    flex-grow: 1;
+    height: 1px;
+}
+.or_center{
+    margin-top: -11px;
+    margin-left: 18px;
+    margin-right: 18px;
+}
+.social_login_button, .login_button{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+button.mat-primary{
+    min-width: 30% !important;
+}

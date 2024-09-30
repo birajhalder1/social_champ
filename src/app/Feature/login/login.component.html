@@ -46,13 +46,19 @@
             <button mat-raised-button style="margin-right: 5px;" color="primary" type="submit" (click)="onSubmit()">
                 {{isApiCalling ? 'Please Wait..' : 'Login'}}
             </button>
-
-            <button mat-raised-button color="primary" (click)="login()"><img src="assets/image/google.png" style="margin-top: -4px;" alt=""> Login with Google</button>
           </div>
-      </form>
+        </form>
+        <div class="social_login_wapper">
+          <div class="or_left"></div>
+          <div class="or_center">OR</div>
+          <div class="or_right"></div>
+        </div>
+        <div class="social_login_button">
+          <button (click)="login()" class="login_button"><img src="assets/image/google.png" alt=""> Login with Google</button>
+        </div>
      
       <div>
-        <span class="link" [routerLink]="['/registration']">Sign Up ?</span>
+        Don't have an account? <span class="link" [routerLink]="['/registration']">Sign up</span>
       </div>
     </mat-card>
   </div>

@@ -1,0 +1,26 @@
+<span class="title"><div class="post_back_area"><mat-icon class="back-button" mat-dialog-close>keyboard_backspace</mat-icon> Create Post</div> <button class="mat-primary" (click)="createPost()">{{isApiCall ? 'Please Wait..' : 'Save'}}</button></span>
+<hr>
+<mat-dialog-content>
+    <div class="mt-5">
+        <textarea name="" class="post-input-box-area" rows="5" [(ngModel)]="post_details_info"></textarea>
+    </div>
+
+    <div class="image-grid" *ngIf="final_image.length>0">
+        <div class="col-md-2 col-6 custom_design"
+            *ngFor="let data of upload_image; let i=index">
+            <div class="image-up">
+                <img [src]="data" id="" class="custom_images">
+                <div class="remove-image-outer">
+                    <span class="remove-image"
+                        (click)="removeImageNew(i)"><mat-icon>close</mat-icon></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+</mat-dialog-content>
+<div class="link-footer">
+    <mat-icon (click)="triggerFileInput()">insert_link</mat-icon>
+    <input type="file" multiple name="myImage" (change)="changeImage($event)" accept="image/*" #fileInput style="display: none;" />
+</div>

@@ -67,7 +67,9 @@ export class ApiServiceService {
   allPost(): Observable<any>{
     return this.http.get(environment.api_dev + 'post_management/getAllPost', this.getHeader());
   }
-
+  createPost(data: any): Observable<any>{
+    return this.http.post(environment.api_dev + 'post_management/create-post', data, this.getHeaderFileUpload());
+  }
   successAlert(message: string){
     this._snackBar.open(message, '', {
       duration: 2000,

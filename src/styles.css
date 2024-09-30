@@ -67,6 +67,29 @@ body {
 .sidebar-scroll{
   overflow: hidden;
 }
+button.mat-primary{
+  background-color: #53bdeb !important;
+}
+
+.grid_padding_left .mat-grid-tile-content, .grid_padding_right .mat-grid-tile-content {
+  display: inline !important;
+}
+input:focus, input:focus-visible {
+  outline: none !important;
+  border-color: transparent;
+}
+.mt-2{
+  margin-top: 4px;
+}
+.mt-3{
+  margin-top: 6px;
+}
+.mt-4{
+  margin-top: 8px;
+}
+.mt-5{
+  margin-top: 10px;
+}
 @media (max-width: 999px) {
   .content {
     width: 90%;

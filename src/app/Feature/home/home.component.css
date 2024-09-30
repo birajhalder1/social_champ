@@ -1,5 +1,5 @@
 .full-width-card {
-  height: 100vh;
+  /* height: 100vh; */
     width: 100%;       /* Ensures the card takes full width of the tile */
     margin: 5px;       /* Adds spacing between cards */
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for better visual */
@@ -44,4 +44,51 @@
     color: gray;
   }
   
+  .post-card-container{
+    width: 100%;
+    overflow: scroll;
+    height: 100%;
+  }
+  
+  .post-card-container::-webkit-scrollbar {
+    display: none;
+  }
+  /* .grid_padding_left{
+    padding-top: calc(5% - 7px) !important;
+    height: 50%;
+  }
+  .grid_padding{
+    padding-top: calc(5% - 7px) !important;
+  }
+  .grid_main{
+    padding-bottom: calc(45% - 5px) !important;
+  } */
+
+  mat-grid-tile.mat-grid-tile-content {
+    display: inline !important;
+  }
+
+  /* Styles for mat-grid-tile-content */
+mat-grid-tile-content {
+  display: inline-block !important;
+}
+.post-input-box-area, .post-input-box{
+  width: 100%;
+}
+.post-input-box{
+  border-radius: 5px;
+  padding: 5px;
+}
+.like_main{
+  position: relative;
+}
+.like_length{
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.like_length.active{
+  top: -20px;
+  right: -30px;
+}
   

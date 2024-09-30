@@ -6,10 +6,12 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './Core/material/material.module';
 import { HttpClientModule } from '@angular/common/http';
+import { CommonModalComponent } from './common-modal/common-modal.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CommonModalComponent
   ],
   imports: [
     BrowserModule,
