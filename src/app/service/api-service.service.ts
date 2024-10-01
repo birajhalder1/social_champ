@@ -60,6 +60,10 @@ export class ApiServiceService {
       return idToken;
     });
   }
+  getUsers(id: string): Observable<any> {
+    return this.http.get(environment.api_dev + 'socialUsers/getByIdUser/'+id, this.getHeader());
+  }
+
   api_google_auth(data: any): Observable<any>{
     return this.http.post(environment.api_dev + 'socialUsers/google-login', data);
   }

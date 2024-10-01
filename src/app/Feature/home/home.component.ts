@@ -4,6 +4,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { CommonModalComponent } from 'src/app/common-modal/common-modal.component';
 import { ApiServiceService } from 'src/app/service/api-service.service';
 
+import { Store, select } from '@ngrx/store';
+import { loadUsers } from '../../Core/store/user.actions';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -11,10 +14,26 @@ import { ApiServiceService } from 'src/app/service/api-service.service';
 })
 export class HomeComponent implements OnInit {
   arrPost: any = [];
-  constructor(private _service: ApiServiceService, private _snackBar: MatSnackBar, public dialog: MatDialog) { }
+
+  users$ = this.store.pipe(select(state => state.userState.users));
+  loading$ = this.store.pipe(select(state => state.userState.loading));
+  user_details: any = {};
+  
+  constructor(private store: Store<any>, private _service: ApiServiceService, private _snackBar: MatSnackBar, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getAllPost();
+    this.user_details = {};
+    setTimeout(() => {
+      this.store.dispatch(loadUsers());
+      // Subscribe to users$ to log the user data
+      this.users$.subscribe(users => {
+        this.user_details = users.body?.findUser;
+        console.log("users", this.user_details);
+      });
+    }, 200);
+
+    
   }
 
   getAllPost(){

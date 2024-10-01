@@ -77,7 +77,7 @@ mat-grid-tile-content {
 }
 .post-input-box{
   border-radius: 5px;
-  padding: 5px;
+  padding: 15px;
 }
 .like_main{
   position: relative;
@@ -90,5 +90,62 @@ mat-grid-tile-content {
 .like_length.active{
   top: -20px;
   right: -30px;
+}
+.social_like{
+  background: #f9f9f9;
+}
+.post_button{
+  padding: 10px;
+}
+
+.image-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.post-image-up {
+  width: 100px;
+  height: 100px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  position: relative;
+}
+
+.post-first-image{
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.post-image-up img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.profile_image {
+  height: 100px;
+  width: 100px;
+  border: 2px solid #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: 5px;
+  overflow: hidden;
+}
+
+.profile_image img {
+  border-radius: 50%;
+}
+.profile_container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.profile_info{
+  text-align: center;
+}
+.profile_info h1{
+  font-family: cursive;
 }
   

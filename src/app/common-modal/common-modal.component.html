@@ -2,7 +2,7 @@
 <hr>
 <mat-dialog-content>
     <div class="mt-5">
-        <textarea name="" class="post-input-box-area" rows="5" [(ngModel)]="post_details_info"></textarea>
+        <textarea name="" class="post-input-box-area" placeholder="Create your post.." rows="5" [(ngModel)]="post_details_info"></textarea>
     </div>
 
     <div class="image-grid" *ngIf="final_image.length>0">
@@ -17,8 +17,6 @@
             </div>
         </div>
     </div>
-    
-
 </mat-dialog-content>
 <div class="link-footer">
     <mat-icon (click)="triggerFileInput()">insert_link</mat-icon>

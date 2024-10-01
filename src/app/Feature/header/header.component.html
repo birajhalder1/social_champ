@@ -4,7 +4,14 @@
         <div class="desktop">
             <!-- <a [ngClass]="{active: active_url == '/movie-list'}" [routerLink]="['/movie-list']" >Movie List</a>
             <a [ngClass]="{active: active_url == '/contact-us'}" [routerLink]="['/contact-us']" >Contact Us</a> -->
-            <a (click)="logout()">Log Out</a>
+            <div class="notification">
+                <mat-icon class="notification-icon">notifications</mat-icon>
+                <span class="notification-count">3</span> <!-- Example notification count -->
+            </div>
+            <div>
+
+                <a (click)="logout()">Log Out</a>
+            </div>
         </div>
         <div class="mobile-menu">
             <mat-icon (click)="onMobileNavBarClick()">menu</mat-icon>

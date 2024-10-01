@@ -52,31 +52,24 @@ export class LoginComponent implements OnInit {
         this.service.successAlert(res.message ? res.message : "Something went wrong, please try again latter.");
         this.isApiCalling = false;
         if(res.status == 200){
-          localStorage.setItem('currentUser', JSON.stringify(this.form.value));
+          localStorage.setItem('data', JSON.stringify(res));
+
           if(this.form.value.isRemember){
             localStorage.setItem('isRemember', JSON.stringify(this.form.value));
           }else{
             localStorage.removeItem('isRemember');
           }
           localStorage.setItem('isLoggedIn', 'true');
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/home']);
         }
       }, (err) => {
         this.isApiCalling = false;
-        this._snackBar.open(err.error.message ? err.error.message : 'Something went wrong, please try again latter.', '', {
-          duration: 2000,
-          horizontalPosition: 'right',
-          verticalPosition: 'top'
-        });
+        this.service.successAlert(err.error.message ? err.error.message : 'Something went wrong, please try again latter.')
       })
       
       
     } else {
-      this._snackBar.open('Please fill out the form correctly.', '', {
-        duration: 2000,
-        horizontalPosition: 'right',
-        verticalPosition: 'top'
-      });
+      this.service.successAlert('Please fill out the form correctly.')
     }
   }
 

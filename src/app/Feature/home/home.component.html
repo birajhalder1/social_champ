@@ -5,42 +5,20 @@
       <!-- Left Column -->
       <mat-grid-tile colspan="3" rowspan="3" class="grid_padding_left">
         <mat-card appearance="outlined" class="full-width-card">
-          <mat-card-content>
-            Simple card content 1
-            Simple card content 1
-            Simple card content 1
-            Simple card content 1
-            Simple card content 1
-            Simple card content 1
-            Simple card content 1
-            Simple card content 1
-            Simple card content 1
-            Simple card content 1
-            Simple card content 1
-            Simple card content 1
-            Simple card content 1
-            Simple card content 1
-            Simple card content 1
-            Simple card content 1
-            Simple card content 1
-            Simple card content 1
-            Simple card content 1
-            Simple card content 1
-            Simple card content 1
-            Simple card content 1
-            Simple card content 1
-            Simple card content 1
-            Simple card content 1
-            Simple card content 1
-            Simple card content 1
-            Simple card content 1
-            Simple card content 1
-            Simple card content 1
-            Simple card content 1
-            Simple card content 1
-            Simple card content 1
-            Simple card content 1
-            Simple card content 1
+          <mat-card-content *ngIf="user_details">
+            <div class="cover_image"  [ngStyle]="{'background-image': 'url(' + user_details?.cover_image + ')', 
+            'background-size': 'cover', 
+            'height': '200px'}">
+            <div class="profile_container">
+              <div class="profile_image">
+                <img src="{{user_details?.profile_image}}" alt="">
+              </div>
+            </div>
+              <div class="profile_info">
+                <h1>{{user_details?.firstname}} {{user_details?.lastname}}</h1>
+                <h4>{{user_details?.email}}</h4>
+              </div>
+            </div>
           </mat-card-content>
         </mat-card>
       </mat-grid-tile>
@@ -49,8 +27,8 @@
       <mat-grid-tile colspan="5" rowspan="5">
         <div class="post-card-container">
           <div class="flex post-input-box-area">
-              <input type="text" class="post-input-box" readonly (click)="openAddModal()">
-              <button class="mat-primary">Create Post</button>
+              <input type="text" class="post-input-box" readonly (click)="openAddModal()" placeholder="Create your post..">
+              <button class="mat-primary post_button">Post</button>
           </div>
           <div *ngFor="let item of arrPost">
             <mat-card appearance="outlined" class="post-card" >
@@ -62,11 +40,24 @@
       
               <mat-card-content>
                 <p>{{ item.details_info }}</p>
+                <div class="image-grid" *ngIf="item.post_image?.length>0">
+                  <div class="post-first-image">
+                    <img [src]="item.post_image[0]" alt="image">
+                  </div>
+                  <ng-container *ngIf="item.post_image?.length>1">
+                    <div class="col-md-2 col-6"
+                        *ngFor="let data of item.post_image; let i=index">
+                        <div class="post-image-up" *ngIf="i>1">
+                            <img [src]="data" alt="image">
+                        </div>
+                    </div>
+                  </ng-container>
+              </div>
               </mat-card-content>
       
               <img mat-card-image *ngIf="item.image" [src]="item.image" alt="Post image">
       
-              <mat-card-actions>
+              <mat-card-actions class="social_like">
                 <div class="like_main">
                   <button mat-button>Like</button>
                   <div class="like_length" *ngIf="item.like.length>0" [ngClass]="{active: item.like.length>1}"><span *ngIf="item.like.length>1">{{item.like[0].firstname}} more </span> {{item.like.length}}</div>
