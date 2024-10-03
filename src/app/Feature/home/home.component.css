@@ -20,10 +20,10 @@
     height: 40px;
   }
   
-  mat-card-header {
+  /* mat-card-header {
     display: flex;
     align-items: center;
-  }
+  } */
   
   mat-card-title, mat-card-subtitle {
     margin-left: 10px;
@@ -132,6 +132,7 @@ mat-grid-tile-content {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   padding: 5px;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .profile_image img {
@@ -148,4 +149,27 @@ mat-grid-tile-content {
 .profile_info h1{
   font-family: cursive;
 }
-  
+.recommendation-title{
+  font-size: 20px;
+  font-family: cursive;
+  text-decoration: underline;
+  font-weight: 600;
+}
+.recommendation-list{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+.customFollowBack{
+  height: 35px;
+  width: 30%;
+  position: relative;
+}
+.customSpinner{
+  position: absolute;
+  margin: 10px 35px;
+}
+.user_navigation{
+  cursor: pointer;
+}

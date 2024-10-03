@@ -81,8 +81,24 @@ export class ApiServiceService {
       verticalPosition: 'top'
     });
   }
+  allUsers({type = ''}): Observable<any>{
+    const params: any = {};
+    if(type) params['type'] = type;
+    var queryString = "?" + Object.keys(params).map(key => key + '=' + params[key]).join('&');
 
+    return this.http.get(environment.api_dev + 'socialUsers/getAllUser' + queryString, this.getHeader());
+  }
 
+  allFollower({type = ''}): Observable<any>{
+    const params: any = {};
+    if(type) params['type'] = type;
+    var queryString = "?" + Object.keys(params).map(key => key + '=' + params[key]).join('&');
+
+    return this.http.get(environment.api_dev + 'socialUsers/getAllFollower' + queryString, this.getHeader());
+  }
+  updateFollower(data: any, id: string): Observable<any>{
+    return this.http.patch(environment.api_dev + 'socialUsers/update-follow/'+ id, data, this.getHeaderFileUpload());
+  }
 
 
 

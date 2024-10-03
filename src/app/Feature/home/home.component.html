@@ -3,14 +3,14 @@
   <div class="main_div">
     <mat-grid-list cols="10" gutterSize="10px" class="grid_main">
       <!-- Left Column -->
-      <mat-grid-tile colspan="3" rowspan="3" class="grid_padding_left">
+      <mat-grid-tile colspan="3" rowspan="5" class="grid_padding_left">
         <mat-card appearance="outlined" class="full-width-card">
           <mat-card-content *ngIf="user_details">
             <div class="cover_image"  [ngStyle]="{'background-image': 'url(' + user_details?.cover_image + ')', 
             'background-size': 'cover', 
             'height': '200px'}">
             <div class="profile_container">
-              <div class="profile_image">
+              <div class="profile_image" [routerLink]="['/profile', user_details?.id]" >
                 <img src="{{user_details?.profile_image}}" alt="">
               </div>
             </div>
@@ -21,6 +21,20 @@
             </div>
           </mat-card-content>
         </mat-card>
+
+        <mat-card appearance="outlined" class="full-width-card" *ngIf="arrRequestFollowers.length">
+          <mat-card-content>
+            <h4 class="recommendation-title">Request Followers</h4>
+            <div class="recommendation-list" *ngFor="let user of arrRequestFollowers; let i=index">
+              <div>{{user.follower_id?.firstname}} {{user.follower_id?.lastname}}</div>
+              <button mat-raised-button class="customFollowBack" (click)="followback(i)" [disabled]="user.isSubmitFollowing">
+                <mat-spinner [diameter]="20" class="customSpinner" color="primary" *ngIf="user.isSubmitFollowing"></mat-spinner> 
+                <span>Follow Back</span>
+              </button>
+            </div>
+          </mat-card-content>
+        </mat-card>
+        
       </mat-grid-tile>
     
       <!-- Center Column: Social Media Feed -->
@@ -33,8 +47,8 @@
           <div *ngFor="let item of arrPost">
             <mat-card appearance="outlined" class="post-card" >
               <mat-card-header>
-                <div mat-card-avatar class="post-avatar1"><img src="{{item.user_id?.profile_image}}" alt="profile_image"></div>
-                <mat-card-title>{{ item.user_name }}</mat-card-title>
+                <div mat-card-avatar class="post-avatar1"><img src="{{item.user_id?.profile_image}}" class="user_navigation" alt="profile_image"></div>
+                <mat-card-title><span class="user_navigation">{{ item.user_name }}</span></mat-card-title>
                 <mat-card-subtitle>{{ item.createdAt | date: 'dd-mm-yyyy, h:mm a' }}</mat-card-subtitle>
               </mat-card-header>
       
@@ -73,7 +87,13 @@
       <!-- Right Column -->
       <mat-grid-tile colspan="2" rowspan="3" class="grid_padding_right">
         <mat-card appearance="outlined" class="full-width-card">
-          <mat-card-content>Simple card content 3</mat-card-content>
+          <mat-card-content>
+            <h4 class="recommendation-title">Recommendation Followers</h4>
+            <div class="recommendation-list" *ngFor="let user of arrRecommendation">
+              <div >{{user.firstname}} {{user.lastname}}</div>
+              <button mat-raised-button>Follow</button>
+            </div>
+          </mat-card-content>
         </mat-card>
       </mat-grid-tile>
     </mat-grid-list>

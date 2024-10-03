@@ -1,0 +1,61 @@
+<app-header></app-header>
+<div class="container">
+    <div class="main_div">
+        <mat-grid-list cols="10" gutterSize="10px" class="grid_main">
+            <!-- Left Column -->
+            <mat-grid-tile colspan="3" rowspan="5">
+                <mat-card appearance="outlined" class="full-width-card grid_left">
+                    <mat-card-content *ngIf="user_details">
+                        <div class="cover_image" [ngStyle]="{'background-image': 'url(' + user_details?.cover_image + ')', 
+            'background-size': 'cover', 
+            'height': '200px'}">
+                            <div class="profile_container">
+                                <div class="profile_image" [routerLink]="['/profile', user_details?.id]">
+                                    <img src="{{user_details?.profile_image}}" alt="">
+                                </div>
+                            </div>
+                            <div class="profile_info">
+                                <h1>{{user_details?.firstname}} {{user_details?.lastname}}</h1>
+                            </div>
+
+                        </div>
+                        <div class="profile_details">
+                            <form class="example-form">
+                                <mat-form-field class="example-full-width" appearance="outline">
+                                    <mat-label>Favorite food</mat-label>
+                                    <input matInput placeholder="Ex. Pizza" value="Sushi">
+                                </mat-form-field>
+
+                                <mat-form-field class="example-full-width" appearance="outline">
+                                    <mat-label>Leave a comment</mat-label>
+                                    <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+                                </mat-form-field>
+                            </form>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </mat-grid-tile>
+
+            <!-- Center Column -->
+            <mat-grid-tile colspan="7" rowspan="5" class="grid_padding_left">
+                <mat-card appearance="outlined" class="full-width-card">
+                    <mat-card-content *ngIf="user_details">
+                        <div class="cover_image" [ngStyle]="{'background-image': 'url(' + user_details?.cover_image + ')', 
+            'background-size': 'cover', 
+            'height': '200px'}">
+                            <div class="profile_container">
+                                <div class="profile_image" [routerLink]="['/profile', user_details?.id]">
+                                    <img src="{{user_details?.profile_image}}" alt="">
+                                </div>
+                            </div>
+                            <div class="profile_info">
+                                <h1>{{user_details?.firstname}} {{user_details?.lastname}}</h1>
+                                <h4>{{user_details?.email}}</h4>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
+</div>

@@ -14,7 +14,9 @@ import { loadUsers } from '../../Core/store/user.actions';
 })
 export class HomeComponent implements OnInit {
   arrPost: any = [];
-
+  arrRecommendation: any = [];
+  arrRequestFollowers: any = [];
+  
   users$ = this.store.pipe(select(state => state.userState.users));
   loading$ = this.store.pipe(select(state => state.userState.loading));
   user_details: any = {};
@@ -23,6 +25,8 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllPost();
+    this.getAllRecommendationList();
+    this.getAllRequestFollowerList();
     this.user_details = {};
     setTimeout(() => {
       this.store.dispatch(loadUsers());
@@ -32,115 +36,49 @@ export class HomeComponent implements OnInit {
         console.log("users", this.user_details);
       });
     }, 200);
-
-    
   }
 
+  getAllRecommendationList(){
+    this.arrRecommendation = [];
+    this._service.allUsers({type: 'recommendation'}).subscribe((res: any) => {
+      if(res.status == 200){
+        this.arrRecommendation = res.body;
+      }
+    }, (err: any) => {
+      this._service.successAlert(err.error.message ? err.error.message : "Something is wrong, please try again latter.");
+    })
+  }
+  getAllRequestFollowerList(){
+    this.arrRequestFollowers = [];
+    this._service.allFollower({type: 'false'}).subscribe((res: any) => {
+      if(res.status == 200){
+        this.arrRequestFollowers = res.body;
+        console.log(this.arrRequestFollowers);
+        
+      }
+    }, (err: any) => {
+      this._service.successAlert(err.error.message ? err.error.message : "Something is wrong, please try again latter.");
+    })
+  }
+  followback(index: number){
+    this.arrRequestFollowers[index].isSubmitFollowing = true;
+    let data = { "isFollowBack": true }
+
+    this._service.updateFollower(data, this.arrRequestFollowers[index].id).subscribe((res: any) => {
+      this.arrRequestFollowers[index].isSubmitFollowing = false;
+      if(res.status == 200){
+        this.arrRequestFollowers.splice(index, 1);
+      }
+    }, (err: any) => {
+      this.arrRequestFollowers[index].isSubmitFollowing = false;
+      this._service.successAlert(err.error.message ? err.error.message : "Something is wrong, please try again latter.");
+    })
+  }
   getAllPost(){
     this.arrPost = [];
     this._service.allPost().subscribe((res: any) => {
       if(res.status == 200){
         this.arrPost = res.body.data;
-        // this.arrPost = [
-        //   {
-        //     user: 'BIRAJ HALDER',
-        //     timestamp: new Date(),
-        //     description: 'This is a sample post description for John Doe.',
-        //     image: '' // Optional image
-        //   },
-        //   {
-        //     user: 'John Doe',
-        //     timestamp: new Date(),
-        //     description: 'This is a sample post description for John Doe.',
-        //     image: '' // Optional image
-        //   },{
-        //     user: 'John Doe',
-        //     timestamp: new Date(),
-        //     description: 'This is a sample post description for John Doe.',
-        //     image: '' // Optional image
-        //   },{
-        //     user: 'John Doe',
-        //     timestamp: new Date(),
-        //     description: 'This is a sample post description for John Doe.',
-        //     image: '' // Optional image
-        //   },{
-        //     user: 'John Doe',
-        //     timestamp: new Date(),
-        //     description: 'This is a sample post description for John Doe.',
-        //     image: '' // Optional image
-        //   },{
-        //     user: 'John Doe',
-        //     timestamp: new Date(),
-        //     description: 'This is a sample post description for John Doe.',
-        //     image: '' // Optional image
-        //   },{
-        //     user: 'John Doe',
-        //     timestamp: new Date(),
-        //     description: 'This is a sample post description for John Doe.',
-        //     image: '' // Optional image
-        //   },{
-        //     user: 'John Doe',
-        //     timestamp: new Date(),
-        //     description: 'This is a sample post description for John Doe.',
-        //     image: '' // Optional image
-        //   },{
-        //     user: 'John Doe',
-        //     timestamp: new Date(),
-        //     description: 'This is a sample post description for John Doe.',
-        //     image: '' // Optional image
-        //   },{
-        //     user: 'John Doe',
-        //     timestamp: new Date(),
-        //     description: 'This is a sample post description for John Doe.',
-        //     image: '' // Optional image
-        //   },{
-        //     user: 'John Doe',
-        //     timestamp: new Date(),
-        //     description: 'This is a sample post description for John Doe.',
-        //     image: '' // Optional image
-        //   },{
-        //     user: 'John Doe',
-        //     timestamp: new Date(),
-        //     description: 'This is a sample post description for John Doe.',
-        //     image: '' // Optional image
-        //   },{
-        //     user: 'John Doe',
-        //     timestamp: new Date(),
-        //     description: 'This is a sample post description for John Doe.',
-        //     image: '' // Optional image
-        //   },{
-        //     user: 'John Doe',
-        //     timestamp: new Date(),
-        //     description: 'This is a sample post description for John Doe.',
-        //     image: '' // Optional image
-        //   },{
-        //     user: 'John Doe',
-        //     timestamp: new Date(),
-        //     description: 'This is a sample post description for John Doe.',
-        //     image: '' // Optional image
-        //   },{
-        //     user: 'John Doe',
-        //     timestamp: new Date(),
-        //     description: 'This is a sample post description for John Doe.',
-        //     image: '' // Optional image
-        //   },{
-        //     user: 'John Doe',
-        //     timestamp: new Date(),
-        //     description: 'This is a sample post description for John Doe.',
-        //     image: '' // Optional image
-        //   },{
-        //     user: 'John Doe',
-        //     timestamp: new Date(),
-        //     description: 'This is a sample post description for John Doe.',
-        //     image: '' // Optional image
-        //   },
-        //   {
-        //     user: 'SUBHAMAY PARIA',
-        //     timestamp: new Date(),
-        //     description: 'Another post without an image.',
-        //     image: '' // No image
-        //   }
-        // ];
       }
     }, (err: any) => {
       this._service.successAlert(err.error.message ? err.error.message : "Something is wrong, please try again latter.");

@@ -23,6 +23,7 @@ const routes: Routes = [
   { path: 'contact-us', loadChildren: () => import('./Feature/contact-us/contact-us.module').then(m => m.ContactUsModule), canActivate: [AuthGuard] },
   { path: 'movie-list', loadChildren: () => import('./Feature/movie-list/movie-list.module').then(m => m.MovieListModule), canActivate: [AuthGuard] },
   { path: 'home', loadChildren: () => import('./Feature/home/home.module').then(m => m.HomeModule), canActivate: [AuthGuard] },
+  { path: 'profile/:id', loadChildren: () => import('./Feature/profile/profile.module').then(m => m.ProfileModule) },
 ];
 
 @NgModule({
