@@ -12,6 +12,8 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { userReducer } from './Core/store/user.reducer';
 import { UserEffects } from './Core/store/user.effects';
+import { MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MY_DATE_FORMATS } from './Core/material/custom-date-format';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,10 @@ import { UserEffects } from './Core/store/user.effects';
     StoreModule.forRoot({ userState: userReducer }),
     EffectsModule.forRoot([UserEffects]),
   ],
-  providers: [],
+  providers: [
+    { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS },
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }, // Set locale if needed
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

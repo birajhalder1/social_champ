@@ -91,3 +91,7 @@ mat-grid-tile-content {
 .grid_left{
     height: 100%;
 }
+.profile_details{
+    max-height: 30rem;
+    overflow-y: scroll;
+}

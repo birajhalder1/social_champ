@@ -21,14 +21,67 @@
                         </div>
                         <div class="profile_details">
                             <form class="example-form">
-                                <mat-form-field class="example-full-width" appearance="outline">
-                                    <mat-label>Favorite food</mat-label>
-                                    <input matInput placeholder="Ex. Pizza" value="Sushi">
+                                <mat-form-field class="example-full-width" appearance="fill">
+                                    <mat-label>First Name</mat-label>
+                                    <input matInput>
                                 </mat-form-field>
 
-                                <mat-form-field class="example-full-width" appearance="outline">
-                                    <mat-label>Leave a comment</mat-label>
-                                    <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+                                <mat-form-field class="example-full-width" appearance="fill">
+                                    <mat-label>Last Name</mat-label>
+                                    <input matInput>
+                                </mat-form-field>
+
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Gender</mat-label>
+                                    <mat-select>
+                                        <mat-option value="male"> Male </mat-option>
+                                        <mat-option value="female"> Female </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Date of Birth</mat-label>
+                                    <input matInput readonly [matDatepicker]="picker" (focus)="picker.open()"
+                                        placeholder="dd-MM-yyyy">
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                </mat-form-field>
+
+                                <mat-form-field class="example-full-width" appearance="fill">
+                                    <mat-label>Mobile</mat-label>
+                                    <input type="tel" matInput maxlength="10">
+                                </mat-form-field>
+
+                                <mat-form-field class="example-full-width" appearance="fill">
+                                    <mat-label>Email</mat-label>
+                                    <input type="email" matInput>
+                                </mat-form-field>
+
+                                <mat-form-field class="example-full-width" appearance="fill">
+                                    <mat-label>Work Exprience</mat-label>
+                                    <input matInput>
+                                </mat-form-field>
+
+                                <mat-form-field class="example-full-width" appearance="fill">
+                                    <mat-label>Education</mat-label>
+                                    <input matInput>
+                                </mat-form-field>
+
+                                <mat-form-field style="width: 100%;">
+                                    <mat-label>Profile Image</mat-label>
+                                    <button mat-icon-button matPrefix (click)="f_input.click()">
+                                        <mat-icon>attach_file</mat-icon>
+                                    </button>
+                                    <input type="text" readonly matInput [formControl]="display" />
+                                    <input type="file" hidden #f_input
+                                        (change)="handleFileInputChange(f_input.files)" />
+                                    <mat-error>this field is required</mat-error>
+                                </mat-form-field>
+
+
+                                <mat-form-field class="example-full-width" appearance="fill">
+                                    <mat-label>About Yourself</mat-label>
+                                    <textarea matInput></textarea>
                                 </mat-form-field>
                             </form>
                         </div>
