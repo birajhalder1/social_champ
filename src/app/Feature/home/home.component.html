@@ -44,7 +44,7 @@
               <input type="text" class="post-input-box" readonly (click)="openAddModal()" placeholder="Create your post..">
               <button class="mat-primary post_button">Post</button>
           </div>
-          <div *ngFor="let item of arrPost">
+          <div *ngFor="let item of arrPost; let i=index">
             <mat-card appearance="outlined" class="post-card" >
               <mat-card-header>
                 <div mat-card-avatar class="post-avatar1"><img src="{{item.user_id?.profile_image}}" class="user_navigation" alt="profile_image"></div>
@@ -73,7 +73,7 @@
       
               <mat-card-actions class="social_like">
                 <div class="like_main">
-                  <button mat-button>Like</button>
+                  <button mat-button (click)="onClickLike(i)">Like</button>
                   <div class="like_length" *ngIf="item.like.length>0" [ngClass]="{active: item.like.length>1}"><span *ngIf="item.like.length>1">{{item.like[0].firstname}} more </span> {{item.like.length}}</div>
                 </div>
                 <button mat-button>Comment</button>

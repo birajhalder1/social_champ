@@ -4,19 +4,28 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { loadGapiInsideDOM } from 'gapi-script';
 import { environment } from 'src/environments/environment';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { io, Socket } from 'socket.io-client';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiServiceService {
-
+  socket!: Socket;
   public weatherDetails = new BehaviorSubject<object>({});  // Use BehaviorSubject
+  public socket_connection: any;  // Use BehaviorSubject
 
   constructor(
     private http: HttpClient,
     private _snackBar: MatSnackBar
   ) { 
     this.initGoogleAuth();
+
+    this.socket = io(environment.socketUrl);
+    // this.socket.on('connect', () => {
+    //   console.log('Socket Connected');
+    // })
+
+    this.socket_connection = new BehaviorSubject<object>(this.socket);
   }
 
   public redirectUrl: any;
@@ -100,6 +109,9 @@ export class ApiServiceService {
     return this.http.patch(environment.api_dev + 'socialUsers/update-follow/'+ id, data, this.getHeaderFileUpload());
   }
 
+  socketConnection(){
+    this.socket_connection.next(this.socket);
+  }
 
 
 

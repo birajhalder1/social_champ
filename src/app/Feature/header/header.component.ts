@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ApiServiceService } from 'src/app/service/api-service.service';
 declare var $: any;
 @Component({
   selector: 'app-header',
@@ -8,10 +9,19 @@ declare var $: any;
 })
 export class HeaderComponent implements OnInit {
   active_url: string = '';
-  constructor(private router: Router) {}
+  constructor(private router: Router, private _service: ApiServiceService) {}
 
   ngOnInit(): void {
     this.active_url = this.router.url;
+
+    this._service.socket_connection.subscribe((socketConnected: any) => {
+      console.log("socketConnected 6666666", socketConnected);
+      
+      socketConnected.on('join notification', (data: any) => {
+        console.log("notification get", data);
+        
+      })
+    })
   }
 
   logout() {

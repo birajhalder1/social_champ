@@ -7,7 +7,7 @@ export const environment = {
   movie_api_key: 'f7ebdeea911230a0068fdeabf6d244bd',
   weather_api_key: '8c5ecaf328334c2390955735241309',
   google_client_id: '380877586998-053setd9g4fh9k6a76u9e21eplnmsm0i.apps.googleusercontent.com',
-
+  socketUrl: 'http://localhost:3000',
   api_dev: 'http://localhost:3000/api/v1/'
 };
 
