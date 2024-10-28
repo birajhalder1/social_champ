@@ -8,6 +8,7 @@ import { Store, select } from '@ngrx/store';
 import { loadUsers } from '../../Core/store/user.actions';
 import { environment } from 'src/environments/environment';
 import { Subscription } from 'rxjs';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-home',
@@ -19,12 +20,24 @@ export class HomeComponent implements OnInit {
   arrPost: any = [];
   arrRecommendation: any = [];
   arrRequestFollowers: any = [];
-
+  isMobile: boolean = false;
   users$ = this.store.pipe(select(state => state.userState.users));
   loading$ = this.store.pipe(select(state => state.userState.loading));
   user_details: any = {};
   homeSubscription: any = Subscription;
-  constructor(private store: Store<any>, private _service: ApiServiceService, private _snackBar: MatSnackBar, public dialog: MatDialog) { }
+  constructor(private breakpointObserver: BreakpointObserver, private store: Store<any>, private _service: ApiServiceService, private _snackBar: MatSnackBar, public dialog: MatDialog) { 
+    this.breakpointObserver.observe([Breakpoints.Handset]).subscribe(result => {
+      this.isMobile = result.matches;
+      console.log("this.isMobile", this.isMobile);
+      
+    });
+
+    const pixelRatio = window.devicePixelRatio;
+const fullWidth = window.screen.width * pixelRatio;
+const fullHeight = window.screen.height * pixelRatio;
+console.log(`Full Device Resolution: ${fullWidth}x${fullHeight}`);
+
+  }
 
   ngOnInit(): void {
     this.socket?.off('join socket');
