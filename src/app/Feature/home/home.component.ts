@@ -103,9 +103,13 @@ export class HomeComponent implements OnInit {
   }
 
   onClickLike(index: number) {
+    console.log(this.arrPost[index]);
+    
     this._service.socket_connection.subscribe((socketConnected: any) => {
       socketConnected.emit('join notification', {
-        post_id: this.arrPost[index].id
+        post_id: this.arrPost[index].id,
+        user_id: localStorage.getItem('user_id'),
+        reciever_id: this.arrPost[index].user_id.id
       });
     })
   }

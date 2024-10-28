@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
         this.isApiCalling = false;
         if(res.status == 200){
           localStorage.setItem('data', JSON.stringify(res));
-
+          localStorage.setItem('user_id', res.body.id);
           if(this.form.value.isRemember){
             localStorage.setItem('isRemember', JSON.stringify(this.form.value));
           }else{
@@ -88,6 +88,7 @@ export class LoginComponent implements OnInit {
         if(response.status == 200){
           localStorage.setItem('isLoggedIn', 'true');
           localStorage.setItem('data', JSON.stringify(response));
+          localStorage.setItem('user_id', response.body.id);
           this.router.navigate(['/home']);
         }
       }, (err) => {

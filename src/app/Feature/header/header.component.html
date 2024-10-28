@@ -6,7 +6,7 @@
             <a [ngClass]="{active: active_url == '/contact-us'}" [routerLink]="['/contact-us']" >Contact Us</a> -->
             <div class="notification">
                 <mat-icon class="notification-icon">notifications</mat-icon>
-                <span class="notification-count">3</span> <!-- Example notification count -->
+                <span class="notification-count">{{arrNotification.length}}</span> <!-- Example notification count -->
             </div>
             <div>
                 <mat-icon aria-hidden="false" matTooltip="Logout" (click)="logout()">logout</mat-icon>

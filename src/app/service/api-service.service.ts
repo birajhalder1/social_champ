@@ -113,7 +113,9 @@ export class ApiServiceService {
     this.socket_connection.next(this.socket);
   }
 
-
+  allNotification(): Observable<any>{
+    return this.http.get(environment.api_dev + 'socialUsers/fetch-notification', this.getHeader());
+  }
 
 
 
