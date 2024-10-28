@@ -7,6 +7,7 @@ import { io, Socket } from 'socket.io-client';
 import { Store, select } from '@ngrx/store';
 import { loadUsers } from '../../Core/store/user.actions';
 import { environment } from 'src/environments/environment';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -22,7 +23,7 @@ export class HomeComponent implements OnInit {
   users$ = this.store.pipe(select(state => state.userState.users));
   loading$ = this.store.pipe(select(state => state.userState.loading));
   user_details: any = {};
-
+  homeSubscription: any = Subscription;
   constructor(private store: Store<any>, private _service: ApiServiceService, private _snackBar: MatSnackBar, public dialog: MatDialog) { }
 
   ngOnInit(): void {
@@ -42,6 +43,12 @@ export class HomeComponent implements OnInit {
         console.log("users", this.user_details);
       });
     }, 200);
+
+    this.homeSubscription = this._service.isCreatePost.subscribe((res: boolean) => {
+      if(res){
+        this.getAllPost();
+      }
+    })
   }
 
   getAllRecommendationList() {
@@ -112,5 +119,11 @@ export class HomeComponent implements OnInit {
         reciever_id: this.arrPost[index].user_id.id
       });
     })
+  }
+
+  ngOnDestroy(){
+    if(this.homeSubscription){
+      this.homeSubscription.unsubscribe();
+    }
   }
 }

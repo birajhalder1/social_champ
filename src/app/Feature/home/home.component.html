@@ -61,7 +61,7 @@
                   <ng-container *ngIf="item.post_image?.length>1">
                     <div class="col-md-2 col-6"
                         *ngFor="let data of item.post_image; let i=index">
-                        <div class="post-image-up" *ngIf="i>1">
+                        <div class="post-image-up" *ngIf="i>0">
                             <img [src]="data" alt="image">
                         </div>
                     </div>

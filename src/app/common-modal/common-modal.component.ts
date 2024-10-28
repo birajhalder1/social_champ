@@ -69,6 +69,7 @@ export class CommonModalComponent implements OnInit {
     this.service.createPost(formData).subscribe((res: any) => {
       this.isApiCall = false;
       if(res.status == 200){
+        this.service.isCreatePost.next(true);
         this.service.successAlert(res.message);
         this.dialogRef.close(true);
       }
