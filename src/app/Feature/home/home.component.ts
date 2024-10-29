@@ -7,7 +7,8 @@ import { io, Socket } from 'socket.io-client';
 import { Store, select } from '@ngrx/store';
 import { loadUsers } from '../../Core/store/user.actions';
 import { environment } from 'src/environments/environment';
-import { BehaviorSubject } from 'rxjs';
+import { Subscription } from 'rxjs';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-home',
@@ -19,13 +20,25 @@ export class HomeComponent implements OnInit {
   arrPost: any = [];
   arrRecommendation: any = [];
   arrRequestFollowers: any = [];
-
+  isMobile: boolean = false;
   users$ = this.store.pipe(select(state => state.userState.users));
   loading$ = this.store.pipe(select(state => state.userState.loading));
   user_details: any = {};
   post_index: number = 0;
+  homeSubscription: any = Subscription;
+  constructor(private breakpointObserver: BreakpointObserver, private store: Store<any>, private _service: ApiServiceService, private _snackBar: MatSnackBar, public dialog: MatDialog) { 
+    this.breakpointObserver.observe([Breakpoints.Handset]).subscribe(result => {
+      this.isMobile = result.matches;
+      console.log("this.isMobile", this.isMobile);
+      
+    });
 
-  constructor(private store: Store<any>, private _service: ApiServiceService, private _snackBar: MatSnackBar, public dialog: MatDialog) { }
+    const pixelRatio = window.devicePixelRatio;
+const fullWidth = window.screen.width * pixelRatio;
+const fullHeight = window.screen.height * pixelRatio;
+console.log(`Full Device Resolution: ${fullWidth}x${fullHeight}`);
+
+  }
 
   ngOnInit(): void {
     this.socket?.off('join socket');
@@ -44,6 +57,12 @@ export class HomeComponent implements OnInit {
         console.log("users", this.user_details);
       });
     }, 200);
+
+    this.homeSubscription = this._service.isCreatePost.subscribe((res: boolean) => {
+      if(res){
+        this.getAllPost();
+      }
+    })
   }
 
   getAllRecommendationList() {
@@ -131,6 +150,11 @@ export class HomeComponent implements OnInit {
     //     this.arrPost.splice(this.post_index, 1);
     //   }
     // })
+  }
+  ngOnDestroy(){
+    if(this.homeSubscription){
+      this.homeSubscription.unsubscribe();
+    }
   }
 }
 

@@ -13,6 +13,7 @@ export class ApiServiceService {
   socket!: Socket;
   public weatherDetails = new BehaviorSubject<object>({});  // Use BehaviorSubject
   public socket_connection: any;  // Use BehaviorSubject
+  public isCreatePost = new BehaviorSubject<boolean>(false);
   public isDeletePost = new BehaviorSubject<boolean>(false);
   constructor(
     private http: HttpClient,
