@@ -2,11 +2,9 @@
     <div class="topnav">
         <span [routerLink]="['/dashboard']" class="title">Social Champ</span>
         <div class="desktop">
-            <!-- <a [ngClass]="{active: active_url == '/movie-list'}" [routerLink]="['/movie-list']" >Movie List</a>
-            <a [ngClass]="{active: active_url == '/contact-us'}" [routerLink]="['/contact-us']" >Contact Us</a> -->
-            <div class="notification">
+            <div class="notification notification-container" (mouseenter)="showNotifications()" >
                 <mat-icon class="notification-icon">notifications</mat-icon>
-                <span class="notification-count">{{arrNotification.length}}</span> <!-- Example notification count -->
+                <span class="notification-count">{{arrNotification.length}}</span>
             </div>
             <div>
                 <mat-icon aria-hidden="false" matTooltip="Logout" (click)="logout()">logout</mat-icon>
@@ -22,12 +20,21 @@
                     </button>
                 </div>
                 <ul class="mobile-menu-item">
-                    <!-- <li [ngClass]="{active: active_url == '/dashboard'}" [routerLink]="['/dashboard']">Dashboard</li>
-                    <li [ngClass]="{active: active_url == '/movie-list'}" [routerLink]="['/movie-list']">Movie List</li>
-                    <li [ngClass]="{active: active_url == '/contact-us'}" [routerLink]="['/contact-us']">Contact Us</li> -->
                     <li (click)="logout()">Log Out</li>
                 </ul>
             </div>
         </div>
     </div>
+</div>
+
+<div class="notification-list" *ngIf="isHovered && arrNotification.length>0">
+    <h3>Notification</h3>
+    <ul>
+      <li *ngFor="let item of arrNotification">
+        <div class="notification_contain">
+            <img [src]="item.user_id.profile_image" alt="profile_image">
+            <strong>{{item.user_id.firstname}}</strong> {{item.notification_type}}<span>your post</span>
+        </div>
+      </li>
+    </ul>
 </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CommonModalComponent } from 'src/app/common-modal/common-modal.component';
 import { ApiServiceService } from 'src/app/service/api-service.service';
@@ -7,6 +7,7 @@ import { io, Socket } from 'socket.io-client';
 import { Store, select } from '@ngrx/store';
 import { loadUsers } from '../../Core/store/user.actions';
 import { environment } from 'src/environments/environment';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -22,6 +23,7 @@ export class HomeComponent implements OnInit {
   users$ = this.store.pipe(select(state => state.userState.users));
   loading$ = this.store.pipe(select(state => state.userState.loading));
   user_details: any = {};
+  post_index: number = 0;
 
   constructor(private store: Store<any>, private _service: ApiServiceService, private _snackBar: MatSnackBar, public dialog: MatDialog) { }
 
@@ -103,14 +105,53 @@ export class HomeComponent implements OnInit {
   }
 
   onClickLike(index: number) {
-    console.log(this.arrPost[index]);
-    
     this._service.socket_connection.subscribe((socketConnected: any) => {
       socketConnected.emit('join notification', {
         post_id: this.arrPost[index].id,
         user_id: localStorage.getItem('user_id'),
-        reciever_id: this.arrPost[index].user_id.id
+        reciever_id: this.arrPost[index].user_id.id,
+        notification_type: 'like'
       });
     })
   }
+
+  onEdit() {
+    console.log("Edit clicked");
+  }
+
+  onDelete(index: number) {
+    this.post_index = index;
+    // this.dialog.open(DialogContentComponent, {
+    //   width: '300px', // Set the desired width
+    //   disableClose: true,
+    // });
+
+    // this._service.isDeletePost.subscribe((response: boolean)=>{
+    //   if(response){
+    //     this.arrPost.splice(this.post_index, 1);
+    //   }
+    // })
+  }
 }
+
+// Define the dialog content inline in the same file
+// @Component({
+//   selector: 'app-dialog-content',
+//   template: `
+//     <mat-dialog-content>
+//       <p>Are you sure want to remove this post ?</p>
+//     </mat-dialog-content>
+//     <mat-dialog-actions align="end">
+//       <button mat-button mat-dialog-close>Close</button>
+//       <button mat-button (click)="deletePost()">Submit</button>
+//     </mat-dialog-actions>
+//   `,
+// })
+// export class DialogContentComponent {
+  
+//   constructor(private _service: ApiServiceService,public dialogRef: MatDialogRef<DialogContentComponent>) {}
+
+//   deletePost(){
+//     this._service.isDeletePost.next(true);
+//   }
+// }

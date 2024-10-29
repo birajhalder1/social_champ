@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiServiceService } from 'src/app/service/api-service.service';
 declare var $: any;
@@ -10,21 +10,22 @@ declare var $: any;
 export class HeaderComponent implements OnInit {
   active_url: string = '';
   arrNotification: any = [];
+  isHovered = false;
   constructor(private router: Router, private _service: ApiServiceService) {}
 
   ngOnInit(): void {
     this.active_url = this.router.url;
     this.getAllNotification();
     this._service.socket_connection.subscribe((socketConnected: any) => {
-      console.log("socketConnected 6666666", socketConnected);
-      
       socketConnected.on('join notification', (data: any) => {
-        console.log("notification get", data);
         if(this.arrNotification.length){
           this.arrNotification.unshift([...data]);
         }else{
           this.arrNotification = [...data];
         }
+
+        console.log("this.arrNotification", this.arrNotification);
+        
       })
     })
   }
@@ -57,5 +58,32 @@ export class HeaderComponent implements OnInit {
     $('.main-menu-bar').removeClass('active');
     $('body').removeClass('sidebar-scroll');
     $('#footer-main').css('display', 'block');
+  }
+
+  notifications = [
+    'New comment on your post',
+    'New follower',
+    'Message from John',
+    'Your order has been shipped'
+  ];
+
+  showNotifications() {
+    this.isHovered = true;
+  }
+
+  hideNotifications() {
+    this.isHovered = false;
+  }
+
+  // Listen for click events outside of the notification container
+  @HostListener('document:click', ['$event'])
+  onClick(event: MouseEvent) {
+    const targetElement = event.target as HTMLElement;
+    const notificationContainer = document.querySelector('.notification-container');
+
+    // Check if the click target is outside the notification container
+    if (notificationContainer && !notificationContainer.contains(targetElement)) {
+      this.hideNotifications();
+    }
   }
 }

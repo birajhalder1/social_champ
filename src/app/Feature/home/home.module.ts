@@ -9,13 +9,14 @@ import { ShareModule } from 'src/app/share/share.module';
 
 @NgModule({
   declarations: [
-    HomeComponent
+    HomeComponent,
+    // DialogContentComponent
   ],
   imports: [
     CommonModule,
     HomeRoutingModule,
     ShareModule,
     MaterialModule
-  ]
+  ],
 })
 export class HomeModule { }

@@ -46,24 +46,40 @@
           </div>
           <div *ngFor="let item of arrPost; let i=index">
             <mat-card appearance="outlined" class="post-card" >
-              <mat-card-header>
-                <div mat-card-avatar class="post-avatar1"><img src="{{item.user_id?.profile_image}}" class="user_navigation" alt="profile_image"></div>
-                <mat-card-title><span class="user_navigation">{{ item.user_name }}</span></mat-card-title>
-                <mat-card-subtitle>{{ item.createdAt | date: 'dd-mm-yyyy, h:mm a' }}</mat-card-subtitle>
-              </mat-card-header>
+              <div class="post_title_area">
+                <div class="post_title_area">
+                  <div mat-card-avatar class="post-avatar1"><img src="{{item.user_id?.profile_image}}" class="user_navigation" alt="profile_image"></div>
+                  
+                  <div>
+                    <mat-card-title><span class="user_navigation">{{ item.user_name }}</span></mat-card-title>
+                    <mat-card-subtitle>{{ item.createdAt | date: 'dd-mm-yyyy, h:mm a' }}</mat-card-subtitle>
+                  </div>
+                </div>
+
+                <button mat-icon-button [matMenuTriggerFor]="menu" class="menu-button">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+              
+                <!-- Menu with options -->
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item (click)="onEdit()">Edit</button>
+                  <button mat-menu-item (click)="onDelete(i)">Delete</button>
+                </mat-menu>
+              </div>
       
               <mat-card-content>
                 <p>{{ item.details_info }}</p>
-                <div class="image-grid" *ngIf="item.post_image?.length>0">
+                <div class="image-grid1" *ngIf="item.post_image?.length>0">
                   <div class="post-first-image">
                     <img [src]="item.post_image[0]" alt="image">
                   </div>
                   <ng-container *ngIf="item.post_image?.length>1">
-                    <div class="col-md-2 col-6"
-                        *ngFor="let data of item.post_image; let i=index">
-                        <div class="post-image-up" *ngIf="i>1">
-                            <img [src]="data" alt="image">
-                        </div>
+                    <div class="image-grid">
+                      <div class="col-md-2 col-6" *ngFor="let data of item.post_image; let i=index">
+                          <div class="post-image-up" *ngIf="i>1">
+                              <img [src]="data" alt="image">
+                          </div>
+                      </div>
                     </div>
                   </ng-container>
               </div>

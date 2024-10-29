@@ -48,6 +48,7 @@ a{
 .notification {
   position: relative;
   display: inline-block;
+  cursor: pointer;
 }
 
 .notification-icon {
@@ -72,8 +73,28 @@ a{
   align-items: center;
   gap: 30px;
 }
-
-
+.notification-list{
+  position: absolute;
+  z-index: 36;
+  background: #fff;
+  right: 20px;
+  top: 40px;
+  padding: 5px 20px;
+  cursor: pointer;
+  box-shadow: 0px 0px 5px #0000007d;
+}
+.notification-list li{
+  border-bottom: 1px solid #a8a8a8;
+  padding: 10px;
+}
+.notification_contain{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.notification_contain img{
+  height: 30px;
+}
 @media (max-width: 999px) {
   .main-menu-bar {
     top: 0px;
