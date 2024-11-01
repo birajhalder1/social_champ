@@ -11,6 +11,7 @@ export class HeaderComponent implements OnInit {
   active_url: string = '';
   arrNotification: any = [];
   isHovered = false;
+  notification_count: number = 0;
   constructor(private router: Router, private _service: ApiServiceService) {}
 
   ngOnInit(): void {
@@ -24,7 +25,10 @@ export class HeaderComponent implements OnInit {
           this.arrNotification = [...data];
         }
 
-        console.log("this.arrNotification", this.arrNotification);
+        this.notification_count = 0;
+        this.arrNotification.length>0 && this.arrNotification.map((item: any) =>{
+          if(!item.isCheck) this.notification_count ++;
+        })
         
       })
     })
@@ -34,6 +38,11 @@ export class HeaderComponent implements OnInit {
     this._service.allNotification().subscribe((res: any)=> {
       if(res.status == 200){
         this.arrNotification = res.body;
+
+        this.notification_count = 0;
+        this.arrNotification.length>0 && this.arrNotification.map((item: any) =>{
+          if(!item.isCheck) this.notification_count ++;
+        })
       }else{
         this.arrNotification = [];
       }
@@ -85,5 +94,20 @@ export class HeaderComponent implements OnInit {
     if (notificationContainer && !notificationContainer.contains(targetElement)) {
       this.hideNotifications();
     }
+  }
+
+  onClickNotification(index: number){
+    let data = {
+      isCheck: true
+    }
+    this._service.updateNotification(data, this.arrNotification[index].id).subscribe((res: any) => {
+      if(res.status == 200){
+        this.arrNotification[index].isCheck = true;
+        this.notification_count = this.notification_count -1;
+      }
+    }, (err: any) => {
+      this.arrNotification = [];
+      this._service.successAlert(err.error.message ? err.error.message : "Something is wrong, please try again latter.");
+    })
   }
 }

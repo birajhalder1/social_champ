@@ -4,7 +4,7 @@
         <div class="desktop">
             <div class="notification notification-container" (mouseenter)="showNotifications()" >
                 <mat-icon class="notification-icon">notifications</mat-icon>
-                <span class="notification-count">{{arrNotification.length}}</span>
+                <span class="notification-count" *ngIf="notification_count">{{notification_count}}</span>
             </div>
             <div>
                 <mat-icon aria-hidden="false" matTooltip="Logout" (click)="logout()">logout</mat-icon>
@@ -28,13 +28,13 @@
 </div>
 
 <div class="notification-list" *ngIf="isHovered && arrNotification.length>0">
-    <h3>Notification</h3>
+    <div class="notification-title">Notification</div>
     <ul>
-      <li *ngFor="let item of arrNotification">
-        <div class="notification_contain">
-            <img [src]="item.user_id.profile_image" alt="profile_image">
-            <strong>{{item.user_id.firstname}}</strong> {{item.notification_type}}<span>your post</span>
-        </div>
-      </li>
+        <ng-container *ngFor="let item of arrNotification; let i=index">
+            <li class="notification_contain" [ngClass]="{active: !item.isCheck}" (click)="onClickNotification(i)">
+                    <img [src]="item.user_id.profile_image" alt="profile_image">
+                    <strong>{{item.user_id.firstname}}</strong> {{item.notification_type}}<span>your post</span>
+              </li>
+        </ng-container>
     </ul>
 </div>

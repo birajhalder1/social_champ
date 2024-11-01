@@ -109,7 +109,9 @@ export class ApiServiceService {
   updateFollower(data: any, id: string): Observable<any>{
     return this.http.patch(environment.api_dev + 'socialUsers/update-follow/'+ id, data, this.getHeaderFileUpload());
   }
-
+  updateNotification(data: any, id: string): Observable<any>{
+    return this.http.patch(environment.api_dev + 'socialUsers/update-notification/'+ id, data, this.getHeader());
+  }
   socketConnection(){
     this.socket_connection.next(this.socket);
   }
