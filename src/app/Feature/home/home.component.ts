@@ -64,7 +64,9 @@ console.log(`Full Device Resolution: ${fullWidth}x${fullHeight}`);
       }
     })
   }
-
+  onClickFollow(){
+    
+  }
   getAllRecommendationList() {
     this.arrRecommendation = [];
     this._service.allUsers({ type: 'recommendation' }).subscribe((res: any) => {

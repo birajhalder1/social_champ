@@ -107,7 +107,7 @@
             <h4 class="recommendation-title">Recommendation Followers</h4>
             <div class="recommendation-list" *ngFor="let user of arrRecommendation">
               <div >{{user.firstname}} {{user.lastname}}</div>
-              <button mat-raised-button>Follow</button>
+              <button mat-raised-button (click)="onClickFollow()">Follow</button>
             </div>
           </mat-card-content>
         </mat-card>
